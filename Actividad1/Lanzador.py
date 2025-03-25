@@ -14,10 +14,67 @@ def galaxia(estrella):
     else:
         return "Galaxia C"
     
-def encontrar_estrella_mas_lejana(estrella):
-    x, y, z = estrella.x, estrella.y, estrella.z
-    distancia_origen = math.sqrt((x - 0)**2 + (y - 0)**2 + (z - 0)**2)
-    return distancia_origen
+
+
+def encontrar_estrella_mas_lejana(estrella_A, estrella_B, estrella_C):
+    # Calcular la distancia entre las estrellas
+    distancia_A_B = estrella_A.distancia(estrella_B)
+    distancia_A_C = estrella_A.distancia(estrella_C)
+    distancia_B_C = estrella_B.distancia(estrella_C)
+
+    # Determinar cuál es la estrella más lejana
+    if distancia_A_B > distancia_A_C and distancia_A_B > distancia_B_C:
+        return estrella_A
+    elif distancia_A_C > distancia_A_B and distancia_A_C > distancia_B_C:
+        return estrella_A
+    else:
+        return estrella_C
+import math
+
+# Definición de la clase Estrella
+class Estrella:
+    def __init__(self, nombre, x=0, y=0, z=0):
+        self.nombre = nombre
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def __str__(self):
+        return f"{self.nombre}: ({self.x}, {self.y}, {self.z})"
+    
+    def distancia(self, otra_estrella):
+        # Calcula la distancia euclidiana en 3D
+        dx = self.x - otra_estrella.x
+        dy = self.y - otra_estrella.y
+        dz = self.z - otra_estrella.z
+        return math.sqrt(dx ** 2 + dy ** 2 + dz ** 2)
+
+# Función para encontrar la estrella más lejana
+def encontrar_estrella_mas_lejana(estrella_A, estrella_B, estrella_C):
+    # Calcular la distancia entre las estrellas
+    distancia_A_B = estrella_A.distancia(estrella_B)
+    distancia_A_C = estrella_A.distancia(estrella_C)
+    distancia_B_C = estrella_B.distancia(estrella_C)
+
+    # Determinar cuál es la estrella más lejana
+    if distancia_A_B > distancia_A_C and distancia_A_B > distancia_B_C:
+        return estrella_A
+    elif distancia_A_C > distancia_A_B and distancia_A_C > distancia_B_C:
+        return estrella_A
+    else:
+        return estrella_C
+
+# Creación de las estrellas
+estrella_A = Estrella("Estrella A", 1, 2, 3)
+estrella_B = Estrella("Estrella B", 4, 5, 6)
+estrella_C = Estrella("Estrella C", 7, 8, 9)
+
+# Llamar a la función para encontrar la estrella más lejana
+estrella_mas_lejana = encontrar_estrella_mas_lejana(estrella_A, estrella_B, estrella_C)
+
+# Imprimir el resultado
+print(f"La estrella más lejana es: {estrella_mas_lejana}")
+
 
 def imprimir_estrella(estrella_A, estrella_B, estrella_C):
     print(f"Estrella A: {estrella_A}")
